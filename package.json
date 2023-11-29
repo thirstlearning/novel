@@ -2,7 +2,7 @@
   "name": "novel",
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "npm install && cd packages/core && npm install && npm run build && cd ../../",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "clean": "turbo clean",
