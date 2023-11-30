@@ -123,7 +123,7 @@ export default function Editor({
       debouncedUpdates(e);
       // }
     },
-    autofocus: "end",
+    autofocus: false,
   });
 
   const { complete, completion, isLoading, stop } = useCompletion({
