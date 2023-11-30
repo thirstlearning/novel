@@ -104,13 +104,13 @@ function DragHandle(options: DragHandleOptions) {
 
   function hideDragHandle() {
     if (dragHandleElement) {
-      dragHandleElement.classList.add("hidden");
+      dragHandleElement.classList.add("visually-hidden");
     }
   }
 
   function showDragHandle() {
     if (dragHandleElement) {
-      dragHandleElement.classList.remove("hidden");
+      dragHandleElement.classList.remove("visually-hidden");
     }
   }
 
@@ -161,7 +161,7 @@ function DragHandle(options: DragHandleOptions) {
 
           const rect = absoluteRect(node);
 
-          rect.top += (lineHeight - 24) / 2;
+          rect.top += (lineHeight - 14) / 2;
           rect.top += paddingTop;
           // Li markers
           if (node.matches("ul:not([data-type=taskList]) li, ol li")) {
@@ -171,9 +171,15 @@ function DragHandle(options: DragHandleOptions) {
 
           if (!dragHandleElement) return;
 
-          dragHandleElement.style.left = `${rect.left - rect.width}px`;
-          dragHandleElement.style.top = `${rect.top}px`;
-          showDragHandle();
+          // Hide handle when mouse is on the left of the handle
+          const offsetToHide = rect.left - 25;
+          if (event.clientX < offsetToHide) {
+            hideDragHandle();
+          } else {
+            dragHandleElement.style.left = `${rect.left - rect.width}px`;
+            dragHandleElement.style.top = `${rect.top}px`;
+            showDragHandle();
+          }
         },
         keydown: () => {
           hideDragHandle();
