@@ -76,21 +76,21 @@ const Command = Extension.create({
 
 const getSuggestionItems = ({ query }: { query: string }) => {
   return [
-    {
-      title: "Continue writing",
-      description: "Use AI to expand your thoughts.",
-      searchTerms: ["gpt"],
-      icon: <Magic className="novel-w-7" />,
-    },
-    {
-      title: "Send Feedback",
-      description: "Let us know how we can improve.",
-      icon: <MessageSquarePlus size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
-        window.open("/feedback", "_blank");
-      },
-    },
+    // {
+    //   title: "Continue writing",
+    //   description: "Use AI to expand your thoughts.",
+    //   searchTerms: ["gpt"],
+    //   icon: <Magic className="novel-w-7" />,
+    // },
+    // {
+    //   title: "Send Feedback",
+    //   description: "Let us know how we can improve.",
+    //   icon: <MessageSquarePlus size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).run();
+    //     window.open("/feedback", "_blank");
+    //   },
+    // },
     {
       title: "Text",
       description: "Just start typing with plain text.",
@@ -196,27 +196,27 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       command: ({ editor, range }: CommandProps) =>
         editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
     },
-    {
-      title: "Image",
-      description: "Upload an image from your computer.",
-      searchTerms: ["photo", "picture", "media"],
-      icon: <ImageIcon size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
-        // upload image
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
-        input.onchange = async () => {
-          if (input.files?.length) {
-            const file = input.files[0];
-            const pos = editor.view.state.selection.from;
-            startImageUpload(file, editor.view, pos);
-          }
-        };
-        input.click();
-      },
-    },
+    // {
+    //   title: "Image",
+    //   description: "Upload an image from your computer.",
+    //   searchTerms: ["photo", "picture", "media"],
+    //   icon: <ImageIcon size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).run();
+    //     // upload image
+    //     const input = document.createElement("input");
+    //     input.type = "file";
+    //     input.accept = "image/*";
+    //     input.onchange = async () => {
+    //       if (input.files?.length) {
+    //         const file = input.files[0];
+    //         const pos = editor.view.state.selection.from;
+    //         startImageUpload(file, editor.view, pos);
+    //       }
+    //     };
+    //     input.click();
+    //   },
+    // },
   ].filter((item) => {
     if (typeof query === "string" && query.length > 0) {
       const search = query.toLowerCase();
@@ -355,7 +355,7 @@ const CommandList = ({
       {items.map((item: CommandItemProps, index: number) => {
         return (
           <button
-            className={`novel-flex novel-w-full novel-items-center novel-space-x-2 novel-rounded-md novel-px-2 novel-py-1 novel-text-left novel-text-sm novel-text-stone-900 hover:novel-bg-stone-100 ${
+            className={`novel-flex novel-w-full novel-items-center novel-space-x-2 novel-rounded-md novel-border-transparent novel-bg-white novel-px-2 novel-py-1 novel-text-left novel-text-sm novel-text-stone-900 hover:novel-bg-stone-100 ${
               index === selectedIndex
                 ? "novel-bg-stone-100 novel-text-stone-900"
                 : ""
