@@ -1147,7 +1147,7 @@ var defaultExtensions = [
       if (node.type.name === "heading") {
         return `Heading ${node.attrs.level}`;
       }
-      return "Press '/' for commands...";
+      return "Start typing, or press '/' for commands...";
     },
     includeChildren: true
   }),
